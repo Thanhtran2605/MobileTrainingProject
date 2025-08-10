@@ -48,7 +48,7 @@ const GridContent = () => {
 
   const handleServicePress = (label: string) => {
     if (label === 'Du lịch Dịch vụ') {
-      navigation.navigate('Food');
+      navigation.navigate('SubMenu');
     }
   };
 

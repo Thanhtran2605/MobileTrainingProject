@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 
   listContainer: {
-    alignSelf: 'center',
+    // alignSelf: 'center',
     flexDirection: 'column',
     width: '90%',
     justifyContent: 'center',
@@ -42,37 +42,66 @@ const styles = StyleSheet.create({
   elementContainer: {
     flexDirection: 'row',
     width: '100%',
+    height: 150,
     alignItems: 'center',
-    borderRadius: 8,
-    padding: 12,
+    borderRadius: 20,
     borderWidth: 1,
     backgroundColor: 'rgba(255, 255, 255, 1)',
     borderColor: 'rgba(238, 241, 255, 1)',
     borderStyle: 'solid',
+    overflow: 'hidden',
+    position: 'relative',
   },
 
   elementImage: {
-    width: 121,
-    height: 107,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
     borderRadius: 8,
+    zIndex: 0,
+  },
+
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: 1,
+    backgroundColor: 'rgba(0,0,0,0.3)',
   },
 
   elementTextGroup: {
     flex: 1,
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    marginLeft: 12,
+    paddingHorizontal: 16,
+    zIndex: 2,
   },
 
-  headerTitle: {
+  subText: {
+    fontFamily: 'Poppins',
+    fontWeight: '400',
+    fontSize: 12,
+    letterSpacing: 0,
+    fontStyle: 'normal',
+    color: 'rgba(255, 255, 255, 1)',
+    flexShrink: 1,
+    flexWrap: 'wrap',
+  },
+
+  headingText: {
     fontFamily: 'Nunito',
     fontWeight: '700',
-    fontSize: 18,
+    fontSize: 16,
     letterSpacing: 0,
-    textAlign: 'center',
-    color: 'rgba(0, 85, 167, 1)',
-    flex: 1,
+    color: 'rgba(255, 255, 255, 1)',
+    flexShrink: 1,
+    flexWrap: 'wrap',
+    paddingVertical: 16,
+    fontStyle: 'italic',
   },
 
   searchContainer: {
@@ -91,24 +120,14 @@ const styles = StyleSheet.create({
     height: 48,
   },
 
-  headingText: {
+  headerTitle: {
     fontFamily: 'Nunito',
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: 18,
     letterSpacing: 0,
-    color: 'rgba(28, 38, 49, 1)',
-    flexShrink: 1,
-    flexWrap: 'wrap',
-  },
-
-  subText: {
-    fontFamily: 'Poppins',
-    fontWeight: '400',
-    fontSize: 14,
-    letterSpacing: 0,
-    color: 'rgba(72, 72, 72, 1)',
-    flexShrink: 1,
-    flexWrap: 'wrap',
+    textAlign: 'center',
+    color: 'rgba(0, 85, 167, 1)',
+    flex: 1,
   },
 
   backgroundImage: {
@@ -125,7 +144,11 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     zIndex: 1,
   },
+
+  textSearchEmpty: {
+    textAlign: 'center',
+    marginTop: 20,
+  },
 });
 
 export default styles;
-export { MOUNTAIN_HEIGHT };

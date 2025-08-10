@@ -1,10 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { Image, Text } from 'react-native';
-import HomeStackNavigator from '../navigation/MainStack';
+import HomeStackNavigator from './HomeStack';
 import FoodScreen from '../screens/FoodScreen';
 import { BottomTabBarIconProps } from '../types/BottomTabProps';
-import {BottomTabParamList} from '../types/BottomTabParamList';
+import { BottomTabParamList } from '../types/BottomTabParamList';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -68,15 +69,31 @@ const TabBottom = () => {
 
         tabBarActiveTintColor: 'rgba(0, 85, 167, 1)',
         tabBarInactiveTintColor: 'rgba(202, 202, 202, 1)',
-
       }}
     >
       <Tab.Screen
         name="HomeTab"
         component={HomeStackNavigator}
-        options={{
-          tabBarLabel: 'Trang chủ',
-          tabBarIcon: renderTabIcon(require('../assets/img/Home.png')),
+        // options={{
+        //   tabBarLabel: 'Trang chủ',
+        //   tabBarIcon: renderTabIcon(require('../assets/img/Home.png')),
+        // }}
+        options={({ route }) => {
+          const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+          const hideOnScreens = ['Tourism', 'TourismDetail', 'FoodMap', 'Food'];
+
+          return {
+            tabBarStyle: hideOnScreens.includes(routeName)
+              ? { display: 'none' }
+              : { display: 'flex' },
+            tabBarLabel: 'Trang chủ',
+            tabBarIcon: ({ color, size }) => (
+              <Image
+                source={require('../assets/img/Home.png')}
+                style={{ width: size, height: size, tintColor: color }}
+              />
+            ),
+          };
         }}
       />
       <Tab.Screen
@@ -112,10 +129,6 @@ const TabBottom = () => {
         }}
       />
     </Tab.Navigator>
-
-
-      
-
   );
 };
 

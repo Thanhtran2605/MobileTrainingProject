@@ -43,13 +43,27 @@ const styles = StyleSheet.create({
 
   cardOverlay: {
     position: 'absolute',
-    bottom: 24,
-    left: 16,
-    right: 16,
+    top: '20%',
+    left: '5%',
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
     zIndex: 5,
   },
+
+  
+
+  // card: {
+  //   flexDirection: 'column',
+  //   backgroundColor: 'rgba(255, 255, 255, 1)',
+  //   borderRadius: 6,
+  //   padding: 8,
+  //   maxWidth: 260,
+  //   elevation: 4,
+  //   shadowColor: '#000',
+  //   shadowOffset: { width: 0, height: 2 },
+  //   shadowOpacity: 0.1,
+  //   shadowRadius: 4,
+  // },
 
   card: {
     flexDirection: 'column',
@@ -89,6 +103,7 @@ const styles = StyleSheet.create({
   addressContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 9,
   },
 
   address: {

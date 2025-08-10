@@ -16,8 +16,7 @@ const Header = () => {
   const animatedRef = useRef(new Animated.Value(screenWidth)).current;
   const [textWidth, setTextWidth] = useState(0);
 
-  const marqueeText =
-    'Thông điệp chuyển đổi số:Cuộc cách mạng';
+  const marqueeText = 'Thông điệp chuyển đổi số:Cuộc cách mạng';
 
   useEffect(() => {
     if (textWidth === 0) return;
@@ -52,23 +51,26 @@ const Header = () => {
             <Text style={styles.textHeader}>DANANG</Text>
             <Text style={styles.textHeader}>SMART CITY</Text>
           </View>
-          <Image
-            style={styles.iconHeader}
-            source={require('../assets/img/searchHeader.png')}
-          />
-          <Image
-            style={styles.iconHeader}
-            source={require('../assets/img/Notification.png')}
-          />
+          <View style={{ flexDirection: 'row' }}>
+            <Image
+              style={styles.iconHeader}
+              source={require('../assets/img/searchHeader.png')}
+            />
+            <Image
+              style={styles.iconHeader}
+              source={require('../assets/img/Notification.png')}
+            />
+          </View>
         </View>
 
         <View style={styles.marqueeContainer}>
           <Animated.View style={{ transform: [{ translateX: animatedRef }] }}>
             <Text
-              numberOfLines={1} 
-              ellipsizeMode="clip" 
+              numberOfLines={1}
+              ellipsizeMode="clip"
               style={styles.scrollTexts}
-              onLayout={(e) => setTextWidth(e.nativeEvent.layout.width)}>
+              onLayout={e => setTextWidth(e.nativeEvent.layout.width)}
+            >
               {marqueeText}
             </Text>
           </Animated.View>

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { FoodItem } from '../types/FoodType';
-import { getFood } from '../../services/foodsService';
+import { getFood } from '../../services/api/foodsService';
 
 export const fetchFood = createAsyncThunk<FoodItem[]>(
   'food/fetchFood',

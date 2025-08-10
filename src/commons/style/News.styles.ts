@@ -4,7 +4,7 @@ import { Colors } from '../colors';
 const styles = StyleSheet.create({
   newsContainer: {
     flexDirection: 'column',
-    width: '80%',
+    width: '90%',
     justifyContent: 'center',
     alignSelf: 'center',
     padding: 12,

@@ -10,7 +10,7 @@ import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
-import HomeStackNavigator from './src/navigation/MainStack';
+import HomeStackNavigator from './src/navigation/HomeStack';
 import { Provider } from 'react-redux';
 import { store, persistor } from './src/redux/store';
 import TabBottom from './src/navigation/TabBottom';
@@ -19,7 +19,7 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <SafeAreaProvider>
+         <SafeAreaProvider>
           <NavigationContainer>
             <View style={styles.container}>
               <TabBottom />

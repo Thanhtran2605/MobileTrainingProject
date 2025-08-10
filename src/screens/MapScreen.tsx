@@ -1,5 +1,4 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Image,
   SafeAreaView,
@@ -7,14 +6,22 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import styles from '../commons/style/Map.style';
 import MapView, { Marker } from 'react-native-maps';
+import styles from '../commons/style/Map.style';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/RootStackParamList';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'FoodMap'>;
 
 const FoodMapScreen = ({ navigation, route }: Props) => {
   const { food } = route.params;
+  const [showCard, setShowCard] = useState(false);
+
+  useEffect(() => {
+    navigation.getParent()?.setOptions({ tabBarStyle: { display: 'none' } });
+    return () => navigation.getParent()?.setOptions({ tabBarStyle: undefined });
+  }, [navigation]);
 
   const coords = {
     latitude: Number(food.vi_do),
@@ -39,11 +46,20 @@ const FoodMapScreen = ({ navigation, route }: Props) => {
       </View>
 
       <View style={{ flex: 1 }}>
-        <MapView style={styles.map} initialRegion={coords}>
+        <MapView
+          style={styles.map}
+          initialRegion={coords}
+          onPanDrag={() => setShowCard(false)}
+        >
           <Marker
             coordinate={coords}
             image={require('../assets/img/PingLocation.png')}
-          >
+            onPress={() => setShowCard(true)}
+          ></Marker>
+        </MapView>
+
+        {showCard && (
+          <View style={styles.cardOverlay}>
             <View style={styles.card}>
               <View style={styles.elementCard}>
                 <Image source={{ uri: food.hinh_anh }} style={styles.image} />
@@ -56,31 +72,9 @@ const FoodMapScreen = ({ navigation, route }: Props) => {
                 />
                 <Text style={styles.address}>{food.dia_chi}</Text>
               </View>
-              <Text style={{ fontSize: 12, color: '#888', marginTop: 4 }}>
-                Vĩ độ: {food.vi_do} | Kinh độ: {food.kinh_do}
-              </Text>
             </View>
-          </Marker>
-        </MapView>
-
-        <View style={styles.cardOverlay}>
-          <View style={styles.card}>
-            <View style={styles.elementCard}>
-              <Image source={{ uri: food.hinh_anh }} style={styles.image} />
-              <Text style={styles.title}>{food.ten}</Text>
-            </View>
-            <View style={styles.addressContainer}>
-              <Image
-                source={require('../assets/img/Location.png')}
-                style={styles.iconLocation}
-              />
-              <Text style={styles.address}>{food.dia_chi}</Text>
-            </View>
-            <Text style={{ fontSize: 12, color: '#888', marginTop: 4 }}>
-              Vĩ độ: {food.vi_do} | Kinh độ: {food.kinh_do}
-            </Text>
           </View>
-        </View>
+        )}
       </View>
     </SafeAreaView>
   );

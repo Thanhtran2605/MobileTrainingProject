@@ -2,10 +2,15 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '../colors';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'rgba(246, 247, 251, 1)',
+  },
+
   grid: {
     width: '90%',
     position: 'relative',
-     alignSelf: 'center',
+    alignSelf: 'center',
   },
 
   gridContainer: {
@@ -81,6 +86,39 @@ const styles = StyleSheet.create({
     color: Colors.text_three,
     textAlign: 'center',
     maxWidth: 78,
+  },
+
+  // *********
+  header: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    paddingRight: 24,
+    paddingBottom: 16,
+    paddingLeft: 24,
+    paddingTop: 16,
+    alignItems: 'center',
+    marginBottom: 4,
+    marginVertical: 6,
+    justifyContent: 'center',
+    position: 'relative',
+  },
+
+  backIcon: {
+    position: 'absolute',
+    left: 24,
+    zIndex: 2,
+  },
+
+  headerTitle: {
+    fontFamily: 'Nunito',
+    fontWeight: '700',
+    fontSize: 18,
+    letterSpacing: 0,
+    textAlign: 'center',
+    color: 'rgba(0, 85, 167, 1)',
+    flex: 1,
   },
 });
 

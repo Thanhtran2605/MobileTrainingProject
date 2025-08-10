@@ -31,6 +31,11 @@ const FoodScreen = () => {
   );
 
   useEffect(() => {
+    navigation.getParent()?.setOptions({ tabBarStyle: { display: 'none' } });
+    return () => navigation.getParent()?.setOptions({ tabBarStyle: undefined });
+  }, [navigation]);
+
+  useEffect(() => {
     if (!data || data.length === 0) {
       dispatch(fetchFood());
     }
@@ -79,7 +84,7 @@ const FoodScreen = () => {
             style={{ width: 24, height: 24 }}
           />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Món ăn đặc sản</Text>
+        <Text style={styles.headerTitle}>Món ăn đặc sản ngon</Text>
       </View>
 
       <View style={styles.searchContainer}>
@@ -102,13 +107,13 @@ const FoodScreen = () => {
         showsVerticalScrollIndicator={false}
       />
 
-      <Image
-        source={require('../assets/img/5ngonnui.png')}
-        style={styles.backgroundImage}
-        resizeMode="cover"
-      />
+      <View pointerEvents="none" style={{ alignItems: 'center' }}>
+        <Image
+          source={require('../assets/img/5ngonnui.png')}
+          style={styles.backgroundImage}
+        />
+      </View>
     </SafeAreaView>
-  
   );
 };
 

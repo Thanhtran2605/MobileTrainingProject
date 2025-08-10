@@ -9,12 +9,12 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 16,
+    // paddingBottom: 16,
     marginBottom: 10,
     backgroundColor: Colors.background,
   },
 
-    marqueeContainer: {
+  marqueeContainer: {
     overflow: 'hidden',
     width: '100%',
     height: 30,
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 8,
   },
 
   elementHeader: {
@@ -42,8 +41,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: 50,
-    marginRight: 12,
+    // height: 50,
+    // paddingHorizontal: 10,
   },
 
   avatarImage: {
@@ -54,8 +53,16 @@ const styles = StyleSheet.create({
   },
 
   textContainer: {
-    flex: 1,
-    flexDirection: 'column',
+    // flex: 1,
+    // flexDirection: 'column',
+    // alignItems: 'center',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   textHeader: {
@@ -71,7 +78,7 @@ const styles = StyleSheet.create({
   iconHeader: {
     width: 22,
     height: 22,
-    marginRight: 10,
+    marginLeft: 12,
   },
 
   scrollBlock: {

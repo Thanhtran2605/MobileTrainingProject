@@ -1,6 +1,8 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { newsReducer } from './reducers/NewsReducer';
 import { foodReducer } from './reducers/FoodReducer';
+import { tourismReducer } from './reducers/TourismReducer';
+
 import {
   persistStore,
   persistReducer,
@@ -16,12 +18,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const rootReducer = combineReducers({
   news: newsReducer,
   food: foodReducer,
+  tourism: tourismReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['news', 'food'],
+  whitelist: ['news', 'food', 'tourism'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
