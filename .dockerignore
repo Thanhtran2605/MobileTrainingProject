@@ -1,0 +1,25 @@
+# Folder build
+target/
+
+# Config
+.idea/
+*.iml
+.vscode/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Log/temp
+*.log
+*.tmp
+
+# Folder test
+src/test/
+
+# Maven Wrapper
+.mvn/
+mvnw
+mvnw.cmd
+
