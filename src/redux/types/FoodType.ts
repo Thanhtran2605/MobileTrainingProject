@@ -1,3 +1,7 @@
+export const FETCH_FOOD_REQUEST = 'FETCH_FOOD_REQUEST';
+export const FETCH_FOOD_SUCCESS = 'FETCH_FOOD_SUCCESS';
+export const FETCH_FOOD_FAILURE = 'FETCH_FOOD_FAILURE';
+
 export interface FoodItem {
   id: string;
   ten: string;

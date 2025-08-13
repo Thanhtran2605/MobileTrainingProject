@@ -1,5 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchFood } from '../actions/FoodAction';
+import {
+  FETCH_FOOD_REQUEST,
+  FETCH_FOOD_SUCCESS,
+  FETCH_FOOD_FAILURE,
+} from '../types/FoodType';
 import { FoodState } from '../types/FoodType';
 
 const initialState: FoodState = {
@@ -8,25 +11,15 @@ const initialState: FoodState = {
   error: null,
 };
 
-const foodSlice = createSlice({
-  name: 'food',
-  initialState,
-  reducers: {},
-  extraReducers: builder => {
-    builder
-      .addCase(fetchFood.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchFood.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action.payload;
-      })
-      .addCase(fetchFood.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      });
-  },
-});
-
-export const foodReducer = foodSlice.reducer;
+export const foodReducer = (state = initialState, action: any): FoodState => {
+  switch (action.type) {
+    case FETCH_FOOD_REQUEST:
+      return { ...state, loading: true, error: null };
+    case FETCH_FOOD_SUCCESS:
+      return { ...state, loading: false, data: action.payload };
+    case FETCH_FOOD_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};

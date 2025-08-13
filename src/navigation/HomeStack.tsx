@@ -1,7 +1,10 @@
 import React from 'react';
+import { View } from 'react-native';
+import BackgroundMountain from '../components/BackgroundMoutain';
+import { RootStackParamList } from '../types/RootStackParamList';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabBottom from './TabBottom';
-import { RootStackParamList } from '../types/RootStackParamList';
+// import { RootStackParamList } from '../types/RootStackParamList';
 import SubMenu from '../components/SubMenu';
 import FoodScreen from '../screens/FoodScreen';
 import HomeScreen from '../screens/HomeScreen';
@@ -13,6 +16,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const HomeStackNavigator = () => {
   return (
+    // <View style={{ flex: 1 }}>
+    //   <BackgroundMountain />
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
@@ -26,6 +31,7 @@ const HomeStackNavigator = () => {
       <Stack.Screen name="Tourism" component={TourismScreen} />
       <Stack.Screen name="TourismDetail" component={TourismDetail} />
     </Stack.Navigator>
+    // </View>
   );
 };
 

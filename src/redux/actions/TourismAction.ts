@@ -1,38 +1,40 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Dispatch } from 'redux';
 import { getTourism } from '../../services/api/tourismService';
-import { Tourism } from '../types/TourismType';
+import { Tourism, FetchParams } from '../types/TourismType';
+import {
+  FETCH_TOURISM_REQUEST,
+  FETCH_TOURISM_SUCCESS,
+  FETCH_TOURISM_FAILURE,
+} from '../types/TourismType';
 
-// export const fetchTourism = createAsyncThunk<Tourism[], string | undefined>(
-//   'tourism/fetchTourism',
-//   async (searchText, { rejectWithValue }) => {
-//     try {
-//       const response = await getTourism(searchText);
-//       return response;
-//     } catch (err: any) {
-//       return rejectWithValue(err.message || 'Error fetching tourism');
-//     }
-//   },
-// );
+export const fetchTourismRequest = (append: boolean) => ({
+  type: FETCH_TOURISM_REQUEST,
+  payload: { append },
+});
 
-type FetchTourismParams = {
-  searchText?: string;
-  limit?: number;
-  offset?: number;
-  append?: boolean;
-};
+export const fetchTourismSuccess = (data: Tourism[], append: boolean) => ({
+  type: FETCH_TOURISM_SUCCESS,
+  payload: { data, append },
+});
 
-export const fetchTourism = createAsyncThunk<
-  { data: Tourism[]; append: boolean },
-  FetchTourismParams
->(
-  'tourism/fetchTourism',
-  async ({ searchText, limit = 10, offset = 0, append = false }, { rejectWithValue }) => {
+export const fetchTourismFailure = (error: string) => ({
+  type: FETCH_TOURISM_FAILURE,
+  payload: error,
+});
+
+export const fetchTourism = ({
+  searchText,
+  limit = 10,
+  offset = 0,
+  append = false,
+}: FetchParams) => {
+  return async (dispatch: Dispatch) => {
+    dispatch(fetchTourismRequest(append));
     try {
       const response = await getTourism(searchText, limit, offset);
-      return { data: response || [], append };
+      dispatch(fetchTourismSuccess(response || [], append));
     } catch (err: any) {
-      return rejectWithValue(err.message || 'Error fetching tourism');
+      dispatch(fetchTourismFailure(err.message || 'Error fetching tourism'));
     }
-  },
-);
-
+  };
+};

@@ -25,12 +25,19 @@ import {
   sendNotification,
 } from './src/services/api/fcmService';
 import messaging from '@react-native-firebase/messaging';
+import DeviceInfo from 'react-native-device-info';
 
 const API_KEY = 'MY_SECRET_KEY';
 
 function App() {
   useEffect(() => {
-    requestPermissionAndSaveToken('user123');
+    // requestPermissionAndSaveToken('user123');
+
+    const saveTokenWithDeviceId = async () => {
+      const deviceId = await DeviceInfo.getUniqueId();
+      await requestPermissionAndSaveToken(deviceId);
+    };
+    saveTokenWithDeviceId();
 
     const unsubscribeOnMessage = messaging().onMessage(async remoteMessage => {
       Alert.alert(

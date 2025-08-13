@@ -1,7 +1,7 @@
 import messaging from '@react-native-firebase/messaging';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://192.168.0.110:8080/api/v1/fcm';
+const API_BASE_URL = 'http://192.168.79.102:8080/api/v1/fcm';
 
 export const requestPermissionAndSaveToken = async (userId: string) => {
   try {
@@ -19,6 +19,7 @@ export const requestPermissionAndSaveToken = async (userId: string) => {
     console.log('FCM Token:', token);
 
     await axios.post(`${API_BASE_URL}/token`, { userId, token });
+    console.log('Success', 'Userid: ', userId, 'Token', token);
   } catch (error: any) {
     console.error('Error saving token:', error.message);
   }
@@ -37,7 +38,7 @@ export const sendNotification = async (
         toToken,
         title,
         body,
-        data: { screen: 'HomeScreen' },
+        data: { screen: 'Home' },
       },
       {
         headers: { 'x-api-key': apiKey },

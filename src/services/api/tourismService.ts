@@ -12,12 +12,7 @@ export const getTourism = async (
         ? `${baseUrl}&q=hinh_thuc_du_lich:${encodeURIComponent(searchText)}`
         : baseUrl;
 
-    const response = await axiosInstance.get(url, {
-      auth: {
-        username: 'apitest1022dn',
-        password: 'IOC@1022#',
-      },
-    });
+    const response = await axiosInstance.get(url);
 
     return response.data;
   } catch (error) {

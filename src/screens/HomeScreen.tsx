@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, View, Image } from 'react-native';
 import GridContent from '../components/GridContent';
 import Header from '../components/Header';
 import News from '../components/News';
+// import BackgroundMountain from '../components/BackgroundMoutain';
 
 const HomeScreen = () => {
   return (

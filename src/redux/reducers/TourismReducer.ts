@@ -1,12 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchTourism } from '../actions/TourismAction';
+import {
+  FETCH_TOURISM_REQUEST,
+  FETCH_TOURISM_SUCCESS,
+  FETCH_TOURISM_FAILURE,
+} from '../types/TourismType';
 import { TourismState } from '../types/TourismType';
-
-// const initialState: TourismState = {
-//   loading: false,
-//   data: [],
-//   error: null,
-// };
 
 const initialState: TourismState = {
   loadingInitial: false,
@@ -15,36 +12,45 @@ const initialState: TourismState = {
   error: null,
 };
 
-const tourismSlice = createSlice({
-  name: 'tourism',
-  initialState,
-  reducers: {},
-  extraReducers: builder => {
-    builder
-      .addCase(fetchTourism.pending, (state, action) => {
-        if (action.meta.arg.append) {
-          state.loadingMore = true;
-        } else {
-          state.loadingInitial = true;
-        }
-        state.error = null;
-      })
-      .addCase(fetchTourism.fulfilled, (state, action) => {
-        if (action.payload.append) {
-          state.loadingMore = false;
-          state.data = [...state.data, ...action.payload.data];
-        } else {
-          state.loadingInitial = false;
-          state.data = action.payload.data;
-        }
-        state.error = null;
-      });
+export const tourismReducer = (
+  state = initialState,
+  action: any,
+): TourismState => {
+  switch (action.type) {
+    case FETCH_TOURISM_REQUEST:
+      if (action.payload.append) {
+        return { ...state, loadingMore: true, error: null };
+      } else {
+        return { ...state, loadingInitial: true, error: null };
+      }
 
-    // .addCase(fetchTourism.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.payload as string;
-    // });
-  },
-});
+    case FETCH_TOURISM_SUCCESS:
+      if (action.payload.append) {
+        return {
+          ...state,
+          loadingMore: false,
+          data: [...state.data, ...action.payload.data], // merge new data to existing data
+          error: null,
+        };
+      } else {
+        // turn off loadingInitial
+        return {
+          ...state,
+          loadingInitial: false,
+          data: action.payload.data, // set new data
+          error: null,
+        };
+      }
 
-export const tourismReducer = tourismSlice.reducer;
+    case FETCH_TOURISM_FAILURE:
+      return {
+        ...state,
+        loadingInitial: false,
+        loadingMore: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
