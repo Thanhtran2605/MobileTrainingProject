@@ -18,24 +18,9 @@ import { RootStackParamList } from '../types/RootStackParamList';
 type Props = NativeStackScreenProps<RootStackParamList, 'TourismDetail'>;
 
 const TourismDetail = ({ navigation, route }: Props) => {
-  // useHideTabBar();
   const { tourism } = route.params;
   const { width } = Dimensions.get('window');
   const [cardWidth, setCardWidth] = useState(width);
-
-  useEffect(() => {
-    navigation.getParent()?.setOptions({ tabBarStyle: { display: 'none' } });
-    return () => navigation.getParent()?.setOptions({ tabBarStyle: undefined });
-  }, [navigation]);
-
-  useFocusEffect(
-    useCallback(() => {
-      const parent = navigation.getParent()?.getParent(); // lấy Tab Navigator
-      parent?.setOptions({ tabBarStyle: { display: 'none' } });
-
-      return () => parent?.setOptions({ tabBarStyle: undefined });
-    }, [navigation]),
-  );
 
   return (
     <SafeAreaView style={styles.container}>

@@ -31,11 +31,6 @@ const FoodScreen = () => {
   );
 
   useEffect(() => {
-    navigation.getParent()?.setOptions({ tabBarStyle: { display: 'none' } });
-    return () => navigation.getParent()?.setOptions({ tabBarStyle: undefined });
-  }, [navigation]);
-
-  useEffect(() => {
     if (!data || data.length === 0) {
       dispatch(fetchFood());
     }

@@ -27,7 +27,6 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 const LIMIT = 10;
 
 const TourismScreen = () => {
-  useHideTabBar();
   const navigation = useNavigation<NavigationProp>();
 
   const dispatch = useDispatch<AppDispatch>();

@@ -18,11 +18,6 @@ const FoodMapScreen = ({ navigation, route }: Props) => {
   const { food } = route.params;
   const [showCard, setShowCard] = useState(false);
 
-  useEffect(() => {
-    navigation.getParent()?.setOptions({ tabBarStyle: { display: 'none' } });
-    return () => navigation.getParent()?.setOptions({ tabBarStyle: undefined });
-  }, [navigation]);
-
   const coords = {
     latitude: Number(food.vi_do),
     longitude: Number(food.kinh_do),

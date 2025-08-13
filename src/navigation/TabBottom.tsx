@@ -72,30 +72,25 @@ const TabBottom = () => {
       }}
     >
       <Tab.Screen
-        name="HomeTab"
-        component={HomeStackNavigator}
-        // options={{
-        //   tabBarLabel: 'Trang chủ',
-        //   tabBarIcon: renderTabIcon(require('../assets/img/Home.png')),
-        // }}
-        options={({ route }) => {
-          const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-          const hideOnScreens = ['Tourism', 'TourismDetail', 'FoodMap', 'Food'];
-
-          return {
-            tabBarStyle: hideOnScreens.includes(routeName)
-              ? { display: 'none' }
-              : { display: 'flex' },
-            tabBarLabel: 'Trang chủ',
-            tabBarIcon: ({ color, size }) => (
-              <Image
-                source={require('../assets/img/Home.png')}
-                style={{ width: size, height: size, tintColor: color }}
-              />
-            ),
-          };
-        }}
-      />
+              name="HomeTab"
+              component={HomeStackNavigator}
+              options={({ route }) => {
+                const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+                const hideTabBarRoutes = [
+                  'Food',
+                  'FoodMap',
+                  'Tourism',
+                  'TourismDetail',
+                ];
+                return {
+                  tabBarLabel: 'Trang chủ',
+                  tabBarIcon: renderTabIcon(require('../assets/img/Home.png')),
+                  tabBarStyle: hideTabBarRoutes.includes(routeName)
+                    ? { display: 'none' }
+                    : undefined,
+                };
+              }}
+            />
       <Tab.Screen
         name="SearchTab"
         component={() => <Text>Tra cứu</Text>}
